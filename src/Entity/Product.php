@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\ProductRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: ProductRepository::class)]
+class Product
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private $id;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $name;
+
+    #[ORM\Column(type: 'float')]
+    private $weight;
+
+    #[ORM\Column(type: 'integer')]
+    private $price;
+
+    #[ORM\Column(type: 'datetime')]
+    private $createdAt;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getWeight(): ?float
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(float $weight): self
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+    public function getProduct()
+    {
+        $products['name'] = $this->name;
+        $products['price'] = $this->price;
+        $products['weight'] = $this->weight;
+        $products['createdAt'] = $this->createdAt->format('Y-m-d');
+        return $products;
+    }
+}
